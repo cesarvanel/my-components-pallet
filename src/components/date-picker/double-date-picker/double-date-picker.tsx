@@ -54,7 +54,6 @@ export const DoubleDatePicker: React.FC<DoubleDatePickerProps> = (props) => {
               <RectangleIcon />
             </div>
           </div>
-
           <div></div>
         </div>
 

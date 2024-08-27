@@ -98,6 +98,8 @@ export const useDoubleDatePicker = ({
     day: DoubleCalendarDayModel
   ) => {
     e.stopPropagation();
+
+    if(!day.isCurrentMonth) return
     
     if (!rangeStart || (rangeStart && rangeEnd)) {
       setRangeStart(day.date);
@@ -120,7 +122,7 @@ export const useDoubleDatePicker = ({
   const handleGetSelectedDate = (date: DoubleCalendarDayModel): boolean => {
     const isSelected =
       !!selectedDate &&
-      selectedDate.getDate() === date.day &&
+      selectedDate.getDate() === date.day && date.isCurrentMonth &&
       selectedDate.getFullYear() === currentYear;
 
     return isSelected;
@@ -136,18 +138,16 @@ export const useDoubleDatePicker = ({
   const isRangeStartSelected = (date: DoubleCalendarDayModel): boolean => {
     return (
       !!rangeStart &&
-      rangeStart.getDate() === date.day &&
-      rangeStart.getMonth() === date.date.getMonth() &&
-      rangeStart.getFullYear() === currentYear
+      rangeStart.getDate() === date.day &&date.isCurrentMonth && 
+      rangeStart.getMonth() === date.date.getMonth()
     );
   };
 
   const isRangeEndSelected = (date: DoubleCalendarDayModel): boolean => {
     return (
       !!rangeEnd &&
-      rangeEnd.getDate() === date.day && 
-      rangeEnd.getMonth() === date.date.getMonth() &&
-      rangeEnd.getFullYear() === currentYear
+      rangeEnd.getDate() === date.day && date.isCurrentMonth && 
+      rangeEnd.getMonth() === date.date.getMonth()
     );
   };
 

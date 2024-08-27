@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { SimpleDatePicker } from "./components/date-picker/simple-date-picker/simple-date-picker";
 import { PopOver } from "./components/pop-over/pop-over";
 import { DoubleDatePicker } from "./components/date-picker/double-date-picker/double-date-picker";
+import { DateRangePreset } from "./components/date-picker/date-range-preset/date-range-preset";
+import { SimpleDatePicker } from "./components/date-picker/simple-date-picker/simple-date-picker";
 
 const App = () => {
   const [showPopOver, setShowPopOver] = useState<boolean>(false);
   const [showDoubleCalendar, setShowDoubleCalendar] = useState<boolean>(false);
+
+  const [showPresetRange, setShowPresetRange] = useState<boolean>(false);
   return (
     <div>
       <button
@@ -34,18 +37,47 @@ const App = () => {
         Double Calendar View
       </button>
 
-      {/* <PopOver isOpen={showPopOver} onClose={() => setShowPopOver(false)}>
+      <button
+        onClick={() => {
+          setShowPresetRange(!showPresetRange);
+        }}
+        style={{
+          margin: 50,
+          padding: 10,
+          pointerEvents: showPresetRange ? "none" : undefined,
+        }}
+      >
+        Date range presets
+      </button>
+
+      <PopOver isOpen={showPopOver} onClose={() => setShowPopOver(false)}>
         <SimpleDatePicker isOpen={showPopOver} rangeMode />
-      </PopOver> */}
+      </PopOver>
+      <div
+        style={{
+          position: "relative",
+          backgroundColor: "red",
+        }}
+      >
+        <PopOver
+          isOpen={showDoubleCalendar}
+          onClose={() => setShowDoubleCalendar(false)}
+        >
+          <DoubleDatePicker
+            isOpen={showDoubleCalendar}
+            onRangeSelect={() => {}}
+          />
+        </PopOver>
+      </div>
 
       <PopOver
-        isOpen={showDoubleCalendar}
-        onClose={() => setShowDoubleCalendar(false)}
+        isOpen={showPresetRange}
+        onClose={() => setShowPresetRange(false)}
       >
-        <DoubleDatePicker
-          isOpen={showDoubleCalendar}
-          onRangeSelect={() => {}}
-        ></DoubleDatePicker>
+        <DateRangePreset
+          isOpen={showPresetRange}
+          rangeMode
+        />
       </PopOver>
     </div>
   );
