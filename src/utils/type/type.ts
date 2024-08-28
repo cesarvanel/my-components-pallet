@@ -14,3 +14,14 @@ export type DoubleCalendarDayModel = {
    isCurrentMonth: boolean;
 
 }
+
+
+export interface TabItem {
+  title: string;
+  content: string;
+}
+
+export interface TabItemWithOwlet {
+  title: string;
+  path: string;
+}

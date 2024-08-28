@@ -7,6 +7,10 @@ import { useDropDown } from "./components/drop-down/use-drop-down";
 import { DropDown } from "./components/drop-down/drop-down";
 import { Button } from "./components/button/button";
 import NavBar from "./components/navbar/nav-bar";
+import Tabs from "./components/tabs/tabs";
+import TabsWithOwlet from "./components/tabs/tabs-with-oulet/tabs-with-oulet";
+import { tabItems, tabItemsWithOWlet } from "./utils/helper/tabs-data-helper";
+import { RadioGroup } from "./components/radio-group/radio-group";
 
 const App = () => {
   const [showPopOver, setShowPopOver] = useState<boolean>(false);
@@ -108,6 +112,17 @@ const App = () => {
       </PopOver>
 
       <NavBar />
+
+      {/* <Tabs
+        tabItems={tabItems}
+        customStyles={{
+          marginBottom: 50,
+        }}
+      /> */}
+
+      <RadioGroup/>
+
+      <TabsWithOwlet tabItemsWithOWlet={tabItemsWithOWlet} />
     </div>
   );
 };

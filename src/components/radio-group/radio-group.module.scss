@@ -1,0 +1,50 @@
+.RadioGroup {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 20px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+
+  .group-item {
+    padding: 20px;
+    border: 2px solid #d9d9d9;
+    color: #000;
+    border-radius: 10px;
+
+    .text {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: Medium;
+      font-size: 30px;
+      margin-bottom: 12px;
+      .circle {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 4px solid #d9d9d9;
+      }
+    }
+
+    .business {
+      color: #d9d9d9;
+      font-size: 16px;
+      font-family: "Regular";
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+
+    .money {
+      color: #000;
+      font-size: 24px;
+      font-family: Medium;
+    }
+  }
+}

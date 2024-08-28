@@ -1,0 +1,70 @@
+.TabsWithOwlet {
+  width: 100%;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+
+  .tab-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 20px;
+    max-width: 600px;
+    width: 100%;
+  }
+
+  .tab-item {
+    padding: 10px 20px;
+    cursor: pointer;
+    flex: 1;
+    text-align: center;
+    position: relative;
+    transition: color 0.3s ease;
+    color: #555;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    &.active {
+      color: #007bff;
+      font-weight: bold;
+    }
+
+    &.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      height: 3px;
+      width: 100%;
+      background-color: #007bff;
+      transform: scaleX(1);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    &:not(.active)::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      height: 3px;
+      width: 100%;
+      background-color: transparent;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      color: #007bff;
+    }
+  }
+
+  .tab-content {
+    position: relative;
+  }
+}
