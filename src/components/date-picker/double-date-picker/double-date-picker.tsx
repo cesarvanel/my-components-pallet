@@ -85,7 +85,7 @@ export const DoubleDatePicker: React.FC<DoubleDatePickerProps> = (props) => {
                     "prev-month": !date.isCurrentMonth,
                     "next-month": !date.isCurrentMonth,
                     "active-day": handleGetSelectedDate(date),
-                    "today-day": isToday,
+                    "today-day": isToday && date.isCurrentMonth,
                     "in-range": isInRange(date),
                     "is-range-or-end-selected":
                       isRangeStartSelected(date) || isRangeEndSelected(date),
@@ -148,7 +148,7 @@ export const DoubleDatePicker: React.FC<DoubleDatePickerProps> = (props) => {
                       "prev-month": !date.isCurrentMonth,
                       "next-month": !date.isCurrentMonth,
                       "active-day": handleGetSelectedDate(date),
-                      "today-day": isToday,
+                      "today-day": isToday && date.isCurrentMonth,
                       "in-range":isInRange(date),
                       "is-range-or-end-selected":
                         isRangeStartSelected(date) || isRangeEndSelected(date),
