@@ -3,15 +3,22 @@ import { PopOver } from "./components/pop-over/pop-over";
 import { DoubleDatePicker } from "./components/date-picker/double-date-picker/double-date-picker";
 import { DateRangePreset } from "./components/date-picker/date-range-preset/date-range-preset";
 import { SimpleDatePicker } from "./components/date-picker/simple-date-picker/simple-date-picker";
+import { useDropDown } from "./components/drop-down/use-drop-down";
+import { DropDown } from "./components/drop-down/drop-down";
+import { Button } from "./components/button/button";
+import NavBar from "./components/navbar/nav-bar";
 
 const App = () => {
   const [showPopOver, setShowPopOver] = useState<boolean>(false);
   const [showDoubleCalendar, setShowDoubleCalendar] = useState<boolean>(false);
 
   const [showPresetRange, setShowPresetRange] = useState<boolean>(false);
+
+  const dropDownBehavior = useDropDown();
+
   return (
     <div>
-      <button
+      <Button
         onClick={() => {
           setShowPopOver(!showPopOver);
         }}
@@ -22,9 +29,9 @@ const App = () => {
         }}
       >
         show calendar
-      </button>
+      </Button>
 
-      <button
+      <Button
         onClick={() => {
           setShowDoubleCalendar(!showDoubleCalendar);
         }}
@@ -35,9 +42,9 @@ const App = () => {
         }}
       >
         Double Calendar View
-      </button>
+      </Button>
 
-      <button
+      <Button
         onClick={() => {
           setShowPresetRange(!showPresetRange);
         }}
@@ -48,7 +55,30 @@ const App = () => {
         }}
       >
         Date range presets
-      </button>
+      </Button>
+
+      <Button
+        onClick={dropDownBehavior.toggleDropdown}
+        style={{
+          margin: 20,
+          padding: 10,
+          pointerEvents: dropDownBehavior.isOpen ? "none" : undefined,
+        }}
+      >
+        Dropdown
+      </Button>
+
+      <DropDown
+        isOpen={dropDownBehavior.isOpen}
+        onClose={dropDownBehavior.onClose}
+        customStyles={{
+          width: 400,
+          height: 200,
+          borderRadius: 10,
+          padding: 10,
+          margin: 10,
+        }}
+      />
 
       <PopOver isOpen={showPopOver} onClose={() => setShowPopOver(false)}>
         <SimpleDatePicker isOpen={showPopOver} rangeMode />
@@ -74,11 +104,10 @@ const App = () => {
         isOpen={showPresetRange}
         onClose={() => setShowPresetRange(false)}
       >
-        <DateRangePreset
-          isOpen={showPresetRange}
-          rangeMode
-        />
+        <DateRangePreset isOpen={showPresetRange} />
       </PopOver>
+
+      <NavBar />
     </div>
   );
 };
