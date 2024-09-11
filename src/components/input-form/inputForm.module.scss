@@ -1,0 +1,37 @@
+.InputForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  label {
+    display: block;
+    color: #333333;
+    font-size: 16px;
+    margin-bottom: 12px;
+    font-family: "Medium";
+    
+  }
+
+  input {
+    border: 2px solid #dddddd;
+    border-radius: 8px;
+    outline: none;
+    height: 40px;
+    font-weight: 500;
+    font-size: 16px;
+    font-family: "Medium";
+    padding-left: 16px;
+
+    &:focus {
+      outline: none;
+      border: 2px solid #1F81B9;
+
+    }
+
+    &::placeholder {
+      font-size: 14px;
+      font-family: "Regular";
+      color: #BBBBBB;
+    }
+  }
+}

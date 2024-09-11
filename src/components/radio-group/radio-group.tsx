@@ -1,15 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./radio-group.module.scss";
 import { classNameModule } from "../../utils/class-name-module/classNameModule";
 
 const className = classNameModule(styles);
 
 export const RadioGroup: React.FC = () => {
+  const [selectedRadio, setSelectedRadio] = useState<Array<number>>([]);
+
+  const isSelectedRadio = (index: number): boolean => {
+    return selectedRadio.includes(index);
+  };
+
+  const handleSelected = (index: number) => {
+    if (isSelectedRadio(index)) {
+      return setSelectedRadio(selectedRadio.filter((pos) => pos !== index));
+    }
+
+    setSelectedRadio([...selectedRadio, index]);
+  };
   return (
     <div className={styles["RadioGroup"]}>
       {[1, 2, 3, 4].map((x) => {
         return (
-          <div key={x} {...className("group-item")}>
+          <div
+            role="button"
+            onClick={() => handleSelected(x)}
+            key={x}
+            {...className("group-item", {selected: isSelectedRadio(x)})}
+          >
             <div>
               <div className={styles["text"]}>
                 <div>Standard</div>

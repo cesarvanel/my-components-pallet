@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
+import { FormPage } from "../pages/form/form";
 
 export const router = createBrowserRouter([
   {
@@ -34,4 +35,10 @@ export const router = createBrowserRouter([
       },
     ],
   },
+
+  {
+    path:"/form", 
+    element:<FormPage />
+
+  }
 ]);

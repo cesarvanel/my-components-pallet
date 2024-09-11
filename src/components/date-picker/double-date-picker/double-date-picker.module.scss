@@ -6,67 +6,65 @@
   cursor: pointer;
   display: grid;
   grid-template-columns: 1fr 1px 1fr;
-
-  .grid-second{
-   border: 1px solid #E6E6E6;
-   
+  .grid-second {
+    border: 1px solid #e6e6e6;
   }
 
   .left-day {
-   padding: 20px;
-   .header {
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-     width: 100%;
-     .icon {
-       display: flex;
-       justify-content: center;
-       align-items: center;
-       border: none;
-       background-color: white;
-       width: 44px;
-       height: 44px;
-       border-radius: 100%;
-       cursor: pointer;
-       svg {
-         width: 12px;
-         height: 12px;
-       }
-     }
+    padding: 12px;
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        background-color: white;
+        width: 32px;
+        height: 32px;
+        border-radius: 100%;
+        cursor: pointer;
+        svg {
+          width: 12px;
+          height: 12px;
+        }
+      }
 
-     .day-middle {
-       display: flex;
-       align-items: center;
-       gap: 4px;
-       .item {
-         position: relative;
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         background-color: #ffffff;
-         color: black;
-         border-radius: 6px;
-         padding: 4px 12px;
-         height: 44px;
-         font-weight: bold;
-         font-size: 20px;
-         font-family: "ExtraBold";
-         svg {
-           margin-left: 3px;
-         }
-       }
-     }
-   }
+      .day-middle {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        .item {
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: #ffffff;
+          color: black;
+          border-radius: 6px;
+          padding: 4px 12px;
+          height: 32px;
+          font-weight: bold;
+          font-size: 14px;
+          font-family: "ExtraBold";
+          svg {
+            margin-left: 3px;
+          }
+        }
+      }
+    }
 
-   .container-name {
-      margin-top: 20px;
+    .container-name {
+      margin-top: 12px;
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      margin-bottom: 20px;
+      margin-bottom: 12px;
 
       .day-name {
-        width: 44px;
+        width: 32px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -87,7 +85,7 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          padding: 16px;
+          padding: 12px;
           color: black;
           font-family: "Medium";
           background-color: white;
@@ -99,25 +97,25 @@
           cursor: no-drop;
         }
         .active-day {
-          background-color: #0047ff;
+          color: #0047ff;
           color: #ffffff;
         }
 
         .today-day {
-          border: 2px solid #0047ff;
+          background-color: #cce5ff;
+          color: #0047ff;
         }
 
         .in-range {
           background-color: #cce5ff;
           color: #0047ff;
           border-radius: 0;
-          border:0 ;
+          border: 0;
         }
         .is-range-or-end-selected {
           background-color: #0047ff;
           color: #ffffff;
           margin: -2px;
-          
         }
         .next-month {
           color: #00175426;
@@ -129,69 +127,68 @@
         }
       }
 
-      .active-range{
-        padding:0;
-
+      .active-range {
+        padding: 0;
       }
     }
- }
+  }
 
- .right-day {
-   padding: 20px;
-   .header {
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-     width: 100%;
-     .icon {
-       display: flex;
-       justify-content: center;
-       align-items: center;
-       border: none;
-       background-color: white;
-       width: 44px;
-       height: 44px;
-       border-radius: 100%;
-       cursor: pointer;
-       svg {
-         width: 12px;
-         height: 12px;
-       }
-     }
+  .right-day {
+    padding: 12px;
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        background-color: white;
+        width: 32px;
+        height: 32px;
+        border-radius: 100%;
+        cursor: pointer;
+        svg {
+          width: 12px;
+          height: 12px;
+        }
+      }
 
-     .day-middle {
-       display: flex;
-       align-items: center;
-       justify-content: space-between;
-       gap: 4px;
-       .item {
-         position: relative;
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         background-color: #ffffff;
-         color: black;
-         border-radius: 6px;
-         padding: 4px 12px;
-         height: 44px;
-         font-weight: bold;
-         font-size: 20px;
-         font-family: "ExtraBold";
-         svg {
-           margin-left: 3px;
-         }
-       }
-     }
-   }
+      .day-middle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 4px;
+        .item {
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: #ffffff;
+          color: black;
+          border-radius: 6px;
+          padding: 4px 12px;
+          height: 32px;
+          font-weight: bold;
+          font-size: 14px;
+          font-family: "ExtraBold";
+          svg {
+            margin-left: 3px;
+          }
+        }
+      }
+    }
 
-   .container-name {
-      margin-top: 20px;
+    .container-name {
+      margin-top: 12px;
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      margin-bottom: 20px;
+      margin-bottom: 12px;
 
       .day-name {
-        width: 44px;
+        width: 32px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -212,51 +209,51 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          padding: 16px;
+          padding: 12px;
           color: black;
           font-family: "Medium";
           background-color: white;
           border-radius: 6px;
-        }
-        .prev-month {
-          color: #00175426;
-          background: none;
-          cursor: no-drop;
-        }
-        .active-day {
-          background-color: #0047ff;
-          color: #ffffff;
-        }
 
-        .today-day {
-          border: 2px solid #0047ff;
-        }
+          &.prev-month {
+            color: #00175426;
+            background: none;
+            cursor: no-drop;
+          }
+          &.active-day {
+            background-color: #0047ff;
+            color: #ffffff;
+          }
 
-        .in-range {
-          background-color: #cce5ff;
-          color: #0047ff;
-          border-radius: 0;
-        }
-        .is-range-or-end-selected {
-          background-color: #0047ff;
-          color: #ffffff;
-          margin: -2px;
-        }
-        .next-month {
-          color: #00175426;
-        }
+          &.today-day {
+            background-color: #cce5ff;
+            color: #0047ff;
+          }
 
-        .is-min-or-max-day {
-          color: #00175426;
-          background: none;
+          &.in-range {
+            background-color: #cce5ff;
+            color: #0047ff;
+            border-radius: 0;
+          }
+          &.is-range-or-end-selected {
+            background-color: #0047ff;
+            color: #ffffff;
+            margin: -2px;
+          }
+          &.next-month {
+            color: #00175426;
+          }
+
+          &.is-min-or-max-day {
+            color: #00175426;
+            background: none;
+          }
         }
       }
 
-      .active-range{
-        padding:0;
-
+      .active-range {
+        padding: 0;
       }
     }
-    
- }
+  }
 }

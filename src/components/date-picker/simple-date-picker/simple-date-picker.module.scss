@@ -1,6 +1,6 @@
 .SimpleDatePicker {
   margin: 10px;
-  padding: 20px;
+  padding: 12px;
   border-radius: 16px;
   background-color: #f5f5f5;
   border: 1px solid #707070;
@@ -20,8 +20,8 @@
         align-items: center;
         border: none;
         background-color: white;
-        width: 44px;
-        height: 44px;
+        width: 32px;
+        height: 32px;
         border-radius: 100%;
         cursor: pointer;
         svg {
@@ -42,9 +42,9 @@
           color: black;
           border-radius: 6px;
           padding: 4px 12px;
-          height: 44px;
+          height: 32px;
           font-weight: bold;
-          font-size: 20px;
+          font-size: 14px;
           font-family: "ExtraBold";
           svg {
             margin-left: 3px;
@@ -61,23 +61,16 @@
             padding: 8px;
             font-family: "Medium";
             font-size: 14px;
-            color: #1F1F1F;
-          
+            color: #1f1f1f;
           }
-          :hover{
+          :hover {
             background-color: #707070;
           }
 
-          .selected-month{
+          .selected-month {
             color: #0047ff;
           }
         }
-
-       
-        
-
-       
-
       }
     }
 
@@ -85,10 +78,10 @@
       .container-name {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
-        margin-bottom: 20px;
+        margin-bottom: 12px;
 
         .day-name {
-          width: 44px;
+          width: 32px;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -96,6 +89,7 @@
           font-weight: 600;
           font-family: "Medium";
           text-align: center;
+          font-size: 14px;
         }
       }
 
@@ -109,44 +103,46 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 16px;
+            padding: 12px;
             color: black;
             font-family: "Medium";
             background-color: white;
             border-radius: 6px;
-          }
-          .prev-month {
-            color: #00175426;
-            background: none;
-            cursor: no-drop;
-          }
-          .active-day {
-            background-color: #0047ff;
-            color: #ffffff;
-          }
 
-          .today-day {
-            border: 2px solid #0047ff;
-          }
+            &.prev-month {
+              color: #00175426;
+              background: none;
+              cursor: no-drop;
+            }
+            &.active-day {
+              background-color: #0047ff;
+              color: #ffffff;
+            }
 
-          .in-range {
-            background-color: #cce5ff;
-            color: #0047ff;
-            border-radius: 0;
-          }
-          .is-range-or-end-selected {
-            background-color: #0047ff;
-            color: #ffffff;
-            border-radius: 6px;
-          }
-          .next-month {
-            color: #00175426;
-            background-color: transparent;
-          }
+            &.today-day {
+              background-color: #cce5ff;
+              color: #0047ff;
+            }
 
-          .is-min-or-max-day {
-            color: #00175426;
-            background: none;
+            &.in-range {
+              background-color: #cce5ff;
+              color: #0047ff;
+              border-radius: 0;
+            }
+            &.is-range-or-end-selected {
+              background-color: #0047ff;
+              color: #ffffff;
+              border-radius: 6px;
+            }
+            &.next-month {
+              color: #00175426;
+              background-color: transparent;
+            }
+
+            &.is-min-or-max-day {
+              color: #00175426;
+              background: none;
+            }
           }
         }
 

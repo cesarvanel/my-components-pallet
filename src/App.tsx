@@ -67,22 +67,24 @@ const App = () => {
           margin: 20,
           padding: 10,
           pointerEvents: dropDownBehavior.isOpen ? "none" : undefined,
+          position: "relative",
         }}
       >
         Dropdown
+        <div>
+          <DropDown
+            isOpen={dropDownBehavior.isOpen}
+            onClose={dropDownBehavior.onClose}
+            customStyles={{
+              width: 400,
+              height: 200,
+              borderRadius: 10,
+              padding: 10,
+              marginTop:10
+            }}
+          />
+        </div>
       </Button>
-
-      <DropDown
-        isOpen={dropDownBehavior.isOpen}
-        onClose={dropDownBehavior.onClose}
-        customStyles={{
-          width: 400,
-          height: 200,
-          borderRadius: 10,
-          padding: 10,
-          margin: 10,
-        }}
-      />
 
       <PopOver isOpen={showPopOver} onClose={() => setShowPopOver(false)}>
         <SimpleDatePicker isOpen={showPopOver} rangeMode />
@@ -120,7 +122,7 @@ const App = () => {
         }}
       /> */}
 
-      <RadioGroup/>
+      <RadioGroup />
 
       <TabsWithOwlet tabItemsWithOWlet={tabItemsWithOWlet} />
     </div>

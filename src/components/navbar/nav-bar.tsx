@@ -2,25 +2,32 @@ import { useState } from "react";
 
 import styles from "./nav-bar.module.scss";
 import { classNameModule } from "../../utils/class-name-module/classNameModule";
+import { Link } from "react-router-dom";
 
 const className = classNameModule(styles);
 
 interface NavItem {
   title: string;
+  path:string,
   submenu?: NavItem[];
 }
 
 const navItems: NavItem[] = [
-  { title: "Accueil" },
+  { title: "Accueil", path:"/" },
+
+  { title: "Form", path:"/form" },
   {
-    title: "Services",
+    title: "Services", path:"/service",
     submenu: [
-      { title: "Web Development" },
-      { title: "Design" },
-      { title: "SEO" },
+      { title: "Web Development", path:"/dev"  },
+      { title: "Design", path:"/des" },
+      {
+        title: "SEO",
+        path: "seo",
+      },
     ],
   },
-  { title: "Contact" },
+  { title: "Contact", path:"/contact" },
 ];
 
 const NavBar: React.FC = () => {
@@ -44,7 +51,7 @@ const NavBar: React.FC = () => {
             onMouseEnter={() => handleMouseEnter(item.title)}
             onMouseLeave={handleMouseLeave}
           >
-            <a href="#">{item.title}</a>
+            <Link to={item.path}>{item.title}</Link>
             {item.submenu && openMenu === item.title && (
               <ul
                 {...className("dropdown-menu", {
@@ -52,9 +59,11 @@ const NavBar: React.FC = () => {
                 })}
               >
                 {item.submenu.map((subItem) => (
-                  <li key={subItem.title}>
-                    <a href="#">{subItem.title}</a>
-                  </li>
+                  <Link to={subItem.path}>
+                    <li key={subItem.title}>
+                      <a href="#">{subItem.title}</a>
+                    </li>
+                  </Link>
                 ))}
               </ul>
             )}

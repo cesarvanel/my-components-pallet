@@ -17,6 +17,8 @@
     border: 2px solid #d9d9d9;
     color: #000;
     border-radius: 10px;
+    transition: all 0.4s ease-in-out;
+    cursor: pointer;
 
     .text {
       display: flex;
@@ -25,11 +27,17 @@
       font-family: Medium;
       font-size: 30px;
       margin-bottom: 12px;
+      transition: all 0.4s ease-in-out;
       .circle {
         width: 24px;
         height: 24px;
         border-radius: 50%;
         border: 4px solid #d9d9d9;
+        transition: all 0.4s ease-in-out;
+      }
+
+      :hover {
+        border: none;
       }
     }
 
@@ -39,12 +47,32 @@
       font-family: "Regular";
       font-weight: 400;
       margin-bottom: 12px;
+      transition: all 0.4s ease-in-out;
     }
 
     .money {
       color: #000;
       font-size: 24px;
       font-family: Medium;
+      transition: all 0.4s ease-in-out;
+    }
+
+    &.selected{
+      border: 2px solid  #0752DF;
+      background-color: #EFF4FFAD;
+  
+      .text,.business,.money{
+        color: #0752DF;
+      }
+
+      .text{
+        .circle{
+          width: 24px;
+          height: 24px;
+          border: 4px solid #0752DF;
+        }
+      }
+
     }
   }
 }
