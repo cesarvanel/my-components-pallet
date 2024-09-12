@@ -16,17 +16,36 @@ export const FormPage: React.FC = () => {
           width: 480,
           height: 540,
           display: "flex",
-          justifyContent:"center",
-          alignItems:"center",
-          backgroundColor:"red", 
-          padding:20
-
+          justifyContent: "center",
+          flexDirection: "column",
+          alignItems: "center",
+          padding: 20,
+          gap: 20,
         }}
       >
+
+
+        <div style={{
+
+          color:"#1F81B9", 
+          fontFamily:"Bold", 
+          fontSize:24
+        }}>
+          Create your Account
+        </div>
+
+        <div>
+          create your account in a second to receive our latest new
+        </div>
         <InputForm
+          onChange={(e) => {
+            console.log("e", e.target.value);
+          }}
           label="Email"
           placeholder="Email"
         />
+
+        <InputForm label="Password" type="password" placeholder="password" />
       </div>
     </section>
   );
