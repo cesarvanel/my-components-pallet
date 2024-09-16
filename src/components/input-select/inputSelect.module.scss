@@ -1,0 +1,74 @@
+.InputSelectForm {
+  width: 100%;
+  position: relative;
+  color: #333333;
+
+  label {
+    display: block;
+    color: #333333;
+    font-size: 16px;
+    margin-bottom: 12px;
+    font-family: "Medium";
+  }
+  .customInputSelect {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid #dddddd;
+    border-radius: 8px;
+    height: 40px;
+    cursor: pointer;
+    input {
+      border: none;
+      width: 100%;
+      outline: none;
+      padding-left: 15px;
+      font-size: 14px;
+      font-family: "Medium";
+    }
+
+    .arrow {
+      display: flex;
+      justify-items: center;
+      svg {
+        width: 12px;
+        height: 12px;
+        margin-right: 10px;
+      }
+      &.open {
+        svg {
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    &.open {
+      border: 2px solid #1f81b9;
+    }
+  }
+
+  .customSelectOptions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #bbbbbb;
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 100;
+
+    .option {
+      padding: 10px;
+      cursor: pointer;
+      &:hover {
+        background-color: #f1f1f1;
+      }
+    }
+
+    .no-options {
+      padding: 10px;
+      color: #999;
+    }
+  }
+}

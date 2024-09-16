@@ -1,5 +1,6 @@
 import React from "react";
 import { InputForm } from "../../components/input-form/inputForm";
+import { InputSelectForm } from "../../components/input-select/InputSelect";
 
 export const FormPage: React.FC = () => {
   return (
@@ -23,20 +24,17 @@ export const FormPage: React.FC = () => {
           gap: 20,
         }}
       >
-
-
-        <div style={{
-
-          color:"#1F81B9", 
-          fontFamily:"Bold", 
-          fontSize:24
-        }}>
+        <div
+          style={{
+            color: "#1F81B9",
+            fontFamily: "Bold",
+            fontSize: 24,
+          }}
+        >
           Create your Account
         </div>
 
-        <div>
-          create your account in a second to receive our latest new
-        </div>
+        <div>create your account in a second to receive our latest new</div>
         <InputForm
           onChange={(e) => {
             console.log("e", e.target.value);
@@ -46,6 +44,8 @@ export const FormPage: React.FC = () => {
         />
 
         <InputForm label="Password" type="password" placeholder="password" />
+
+        <InputSelectForm label="Hello les amis " />
       </div>
     </section>
   );

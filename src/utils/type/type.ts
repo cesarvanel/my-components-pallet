@@ -25,3 +25,9 @@ export interface TabItemWithOwlet {
   title: string;
   path: string;
 }
+
+export interface OptionSelect {
+  label:string; 
+  id:string | number
+
+}
