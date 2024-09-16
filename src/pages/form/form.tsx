@@ -24,7 +24,7 @@ export const FormPage: React.FC = () => {
     >
       <div
         style={{
-          width: 480,
+          maxWidth: 480,
           display: "flex",
           justifyContent: "center",
           flexDirection: "column",
