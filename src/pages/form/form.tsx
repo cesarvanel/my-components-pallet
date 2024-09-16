@@ -4,7 +4,6 @@ import { InputSelectForm } from "../../components/input-select/InputSelect";
 import PrimaryButton from "../../components/button/primary-button/PrimaryButton";
 import { OptionSelect } from "../../utils/type/type";
 import InputCheckbox from "../../components/checkbox/Checkbox";
-import ToggleSwitch from "../../components/toggle-switch/ToggleSwitch";
 
 const options: OptionSelect[] = [
   { id: 1, label: "Option 1" },
@@ -26,9 +25,8 @@ export const FormPage: React.FC = () => {
       <div
         style={{
           width: 480,
-          height: 540,
           display: "flex",
-
+          justifyContent: "center",
           flexDirection: "column",
           alignItems: "center",
           padding: 20,
@@ -45,7 +43,7 @@ export const FormPage: React.FC = () => {
           Create your Account
         </div>
 
-        <div style={{ color: "#333333" }}>
+        <div style={{ color: "#333333", textAlign: "center" }}>
           create your account in a second to receive our latest new
         </div>
         <InputForm
@@ -75,8 +73,6 @@ export const FormPage: React.FC = () => {
         </div>
 
         <PrimaryButton type="button" label="Create Account" />
-
-        <ToggleSwitch />
       </div>
     </section>
   );

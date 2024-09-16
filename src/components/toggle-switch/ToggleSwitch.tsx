@@ -7,7 +7,6 @@ const className = classNameModule(styles);
 const ToggleSwitch = () => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
-  console.log("isChecked", isChecked);
   return (
     <div className={styles["ToggleSwitch"]}>
       <input
@@ -17,7 +16,7 @@ const ToggleSwitch = () => {
         checked={isChecked}
         onChange={() => setIsChecked(!isChecked)}
       />
-      <label htmlFor="switch" {...className("slider", "switch")}></label>
+      <label htmlFor="switch" {...className("switch")}></label>
     </div>
   );
 };

@@ -1,0 +1,56 @@
+.InputTextAreaFrom {
+  width: 100%;
+  label {
+    display: block;
+    color: #333333;
+    font-size: 16px;
+    margin-bottom: 12px;
+    font-family: "Medium";
+  }
+  textarea {
+    border-radius: 8px;
+    border: 2px solid #bbbbbb;
+    overflow-y: auto;
+    font-size: 14px;
+    font-family: "Medium";
+    width: 100%;
+    resize: none;
+
+    &:focus {
+      outline: none;
+      border: 2px solid #1f81b9;
+    }
+
+    &.error {
+      border: 2px solid #d44848;
+    }
+
+    &::placeholder {
+      font-size: 14px;
+      font-family: "Regular";
+      color: #bbbbbb;
+
+    }
+
+    &:disabled {
+      background-color: #dddddd;
+
+      &::placeholder {
+        color: #666666;
+      }
+    }
+  }
+
+  .errormessage {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    margin-top: 8px;
+    font-family: "Regular";
+    font-size: 12px;
+    color: #d44848;
+    svg {
+      position: relative;
+    }
+  }
+}
