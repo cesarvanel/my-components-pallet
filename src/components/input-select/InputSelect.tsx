@@ -5,22 +5,27 @@ import { useClickOutSide } from "../../hooks/use-click-out-side";
 import { OptionSelect } from "../../utils/type/type";
 import { DownIcon } from "../icons/DownIcon";
 import { CleanFieldIcon } from "../icons/CleanFieldIcon";
+import SearchIcon from "../icons/SearchIcon";
+import { AlertIcon } from "../icons/AlertIcon";
 
 interface InputSelectFormProps extends ComponentProps<"input"> {
+  options:OptionSelect[], 
+  onChangeOption?: (option: OptionSelect) => void,
   label?: string;
-  withSearchIcon?:boolean
+  withSearchIcon?: boolean;
+  errorMessage?: string;
+  disabled?: boolean;
+
 }
 const className = classNameModule(styles);
 
-const options: OptionSelect[] = [
-  { id: 1, label: "Option 1" },
-  { id: 2, label: "Option 2" },
-  { id: 3, label: "Option 3" },
-  { id: 4, label: "Option 4" },
-];
-
 export const InputSelectForm: React.FC<InputSelectFormProps> = ({
+  options,
   label,
+  withSearchIcon,
+  errorMessage,
+  disabled,
+  onChangeOption,
   ...props
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -29,29 +34,70 @@ export const InputSelectForm: React.FC<InputSelectFormProps> = ({
 
   const [selectedOption, setSelectedOption] = useState<OptionSelect>();
 
+  const [activeOptionIndex, setActiveOptionIndex] = useState<number>();
+
   const ref = useClickOutSide<HTMLDivElement>(() => setIsOpen(false));
 
-  const handleSelectOption = (option: OptionSelect) => {
+  const handleSelectOption = (option: OptionSelect, index: number) => {
     setSelectedOption(option);
+    setActiveOptionIndex(index);
+    onChangeOption?.(option)
     setIsOpen(false);
   };
 
   const handleCleanOptionSelect = () => {
     setSelectedOption(undefined);
-    setSearchValue("")
+    setSearchValue("");
+    setActiveOptionIndex(undefined)
   };
 
   const filteredOptions = options.filter((option) =>
     option.label.toLowerCase().includes(searchValue.toLowerCase())
   );
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (!isOpen) return;
+
+    switch (event.key) {
+      case "ArrowDown":
+        event.preventDefault();
+        setActiveOptionIndex((prevIndex) =>
+          prevIndex === undefined || prevIndex === options.length - 1
+            ? 0
+            : prevIndex + 1
+        );
+        break;
+      case "ArrowUp":
+        event.preventDefault();
+        setActiveOptionIndex((prevIndex) =>
+          prevIndex === undefined || prevIndex === 0
+            ? options.length - 1
+            : prevIndex - 1
+        );
+        break;
+      case "Enter":
+        if (activeOptionIndex !== undefined) {
+          setSelectedOption(options[activeOptionIndex]);
+          setIsOpen(false);
+        }
+        break;
+      case "Escape":
+        setIsOpen(false);
+        break;
+    }
+  };
+
   return (
     <div ref={ref} className={styles["InputSelectForm"]}>
-
-
       <label htmlFor="">{label}</label>
       <div
-        {...className("customInputSelect", { open: isOpen })}
+        tabIndex={0}
+        {...className("customInputSelect", {
+          open: isOpen,
+          error: !!errorMessage,
+          disabled: !!disabled,
+        })}
+        onKeyDown={handleKeyDown}
         onClick={() => setIsOpen((prev) => !prev)}
       >
         <input
@@ -59,6 +105,8 @@ export const InputSelectForm: React.FC<InputSelectFormProps> = ({
           value={selectedOption?.label || searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
           placeholder="Select an option..."
+          {...className("", { withSearchIcon: withSearchIcon ?? false })}
+          disabled={disabled}
           {...props}
         />
         <span {...className("arrow", { open: isOpen })}>
@@ -69,16 +117,31 @@ export const InputSelectForm: React.FC<InputSelectFormProps> = ({
           )}
           <DownIcon />
         </span>
+
+        {withSearchIcon && (
+          <span className={styles["search-icon"]}>
+            <SearchIcon />
+          </span>
+        )}
       </div>
 
-      {isOpen && (
+      {!!errorMessage && (
+        <div id="error" className={styles["errormessage"]}>
+          <AlertIcon />
+          <span>{errorMessage}</span>
+        </div>
+      )}
+
+      {isOpen && !disabled && (
         <div {...className("customSelectOptions")}>
           {filteredOptions.length > 0 ? (
-            filteredOptions.map((option) => (
+            filteredOptions.map((option, index) => (
               <div
                 key={option.id}
-                className={styles["option"]}
-                onClick={() => handleSelectOption(option)}
+                {...className("option", {
+                  active: index === activeOptionIndex,
+                })}
+                onClick={() => handleSelectOption(option, index)}
               >
                 {option.label}
               </div>

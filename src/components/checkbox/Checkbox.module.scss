@@ -1,0 +1,46 @@
+.Checkbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  input[type="checkbox"] {
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #1f81b9;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+
+   
+    &:checked {
+      background-color: #1f81b9;
+      border-color: #1f81b9;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 7px;
+        top: 2px;
+        width: 6px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        transform: rotate(45deg);
+      }
+    }
+
+    &:disabled{
+      background-color: #EEEEEE;
+      border: 1px solid #DDDDDD;
+    }
+
+  }
+
+  label {
+    color: #333333;
+    font-size: 14px;
+    margin-left: 10px;
+  }
+}

@@ -4,13 +4,35 @@
   width: 100%;
   position: relative;
 
-  svg {
-    position: absolute;
-    right: 20px;
-    top: 43px;
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
+  .text-container{
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    span{
+      color:#AAAAAA;
+      font-size: 14px;
+      font-family: "Regular";
+      font-weight: 400;
+      height: 12px;
+      max-width: 250px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: center;
+    }
+  }
+
+  .svg-container {
+    svg {
+      position: absolute;
+      right: 20px;
+      top: 43px;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
   }
 
   label {
@@ -36,10 +58,35 @@
       border: 2px solid #1f81b9;
     }
 
+    &.error {
+      border: 2px solid #d44848;
+    }
+
     &::placeholder {
       font-size: 14px;
       font-family: "Regular";
       color: #bbbbbb;
+    }
+
+    &:disabled {
+      background-color: #dddddd;
+
+      &::placeholder {
+        color: #666666;
+      }
+    }
+  }
+
+  .errormessage {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    margin-top: 8px;
+    font-family: "Regular";
+    font-size: 12px;
+    color: #d44848;
+    svg {
+      position: relative;
     }
   }
 }
