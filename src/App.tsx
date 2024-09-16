@@ -7,10 +7,11 @@ import { useDropDown } from "./components/drop-down/use-drop-down";
 import { DropDown } from "./components/drop-down/drop-down";
 import { Button } from "./components/button/button";
 import NavBar from "./components/navbar/nav-bar";
-import Tabs from "./components/tabs/tabs";
 import TabsWithOwlet from "./components/tabs/tabs-with-oulet/tabs-with-oulet";
-import { tabItems, tabItemsWithOWlet } from "./utils/helper/tabs-data-helper";
+import { tabItemsWithOWlet } from "./utils/helper/tabs-data-helper";
 import { RadioGroup } from "./components/radio-group/radio-group";
+import ModalComponent from "./components/modal/modal";
+import { useModal } from "./hooks/useModal";
 
 const App = () => {
   const [showPopOver, setShowPopOver] = useState<boolean>(false);
@@ -19,6 +20,8 @@ const App = () => {
   const [showPresetRange, setShowPresetRange] = useState<boolean>(false);
 
   const dropDownBehavior = useDropDown();
+
+  const modal = useModal()
 
   return (
     <div>
@@ -80,10 +83,23 @@ const App = () => {
               height: 200,
               borderRadius: 10,
               padding: 10,
-              marginTop:10
+              marginTop: 10,
             }}
           />
         </div>
+      </Button>
+
+      <Button
+        onClick={modal.handleOpenModal}
+        style={{
+          margin: 20,
+          padding: 10,
+          pointerEvents: modal.isModalOpen ? "none" : undefined,
+          position: "relative",
+        }}
+      >
+        Modal
+      
       </Button>
 
       <PopOver isOpen={showPopOver} onClose={() => setShowPopOver(false)}>
@@ -125,6 +141,18 @@ const App = () => {
       <RadioGroup />
 
       <TabsWithOwlet tabItemsWithOWlet={tabItemsWithOWlet} />
+
+      <ModalComponent isOpen={modal.isModalOpen} closeModal={modal.handleCloseModal} >
+        
+        <div style={{
+          maxWidth:700
+        }}>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium,
+          possimus minima? Amet libero reiciendis eum unde ullam, fuga
+          repellendus sapiente corrupti officiis inventore quo praesentium
+          sequi, corporis eaque dicta modi?
+        </div>
+      </ModalComponent>
     </div>
   );
 };
