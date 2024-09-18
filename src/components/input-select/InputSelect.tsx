@@ -45,7 +45,8 @@ export const InputSelectForm: React.FC<InputSelectFormProps> = ({
     setIsOpen(false);
   };
 
-  const handleCleanOptionSelect = () => {
+  const handleCleanOptionSelect = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation()
     setSelectedOption(undefined);
     setSearchValue("");
     setActiveOptionIndex(undefined)
@@ -111,7 +112,7 @@ export const InputSelectForm: React.FC<InputSelectFormProps> = ({
         />
         <span {...className("arrow", { open: isOpen })}>
           {(!!selectedOption || !!searchValue) && (
-            <div onClick={handleCleanOptionSelect}>
+            <div onClick={(e) =>handleCleanOptionSelect(e)}>
               <CleanFieldIcon />
             </div>
           )}
