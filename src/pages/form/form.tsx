@@ -13,6 +13,7 @@ const options: OptionSelect[] = [
 ];
 
 export const FormPage: React.FC = () => {
+
   return (
     <section
       style={{
@@ -61,7 +62,10 @@ export const FormPage: React.FC = () => {
           placeholder="Password"
         />
 
-        <InputSelectForm options={options} label="Year of experience  " />
+        <InputSelectForm
+          options={options}
+          label="Year of experience  "
+        />
 
         <div
           style={{
