@@ -8,26 +8,28 @@ const className = classNameModule(styles);
 
 interface NavItem {
   title: string;
-  path:string,
+  path: string;
   submenu?: NavItem[];
 }
 
 const navItems: NavItem[] = [
-  { title: "Accueil", path:"/" },
+  { title: "Accueil", path: "/" },
 
-  { title: "Form", path:"/form" },
+  { title: "Form", path: "/form" },
   {
-    title: "Services", path:"/service",
+    title: "Services",
+    path: "/service",
     submenu: [
-      { title: "Web Development", path:"/dev"  },
-      { title: "Design", path:"/des" },
+      { title: "Web Development", path: "/dev" },
+      { title: "Design", path: "/des" },
       {
         title: "SEO",
         path: "seo",
       },
     ],
   },
-  { title: "Contact", path:"/contact" },
+  { title: "Contact", path: "/contact" },
+  { title: "Animation", path: "/animation" },
 ];
 
 const NavBar: React.FC = () => {
@@ -59,8 +61,8 @@ const NavBar: React.FC = () => {
                 })}
               >
                 {item.submenu.map((subItem) => (
-                  <Link to={subItem.path}>
-                    <li key={subItem.title}>
+                  <Link key={subItem.title} to={subItem.path}>
+                    <li>
                       <a href="#">{subItem.title}</a>
                     </li>
                   </Link>

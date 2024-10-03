@@ -1,0 +1,47 @@
+.Animation {
+  color: black;
+
+  .hero {
+    animation-duration: 3s;
+    animation-delay: 15s;
+    animation-name: glissement;
+    animation-iteration-count: infinite;
+
+    @keyframes glissement {
+      from {
+        margin-left: 100%;
+        width: 300%;
+      }
+
+      to {
+        margin-left: 0%;
+        width: 100%;
+      }
+    }
+  }
+
+  .anim-test {
+    width: 400px;
+    height: 400px;
+    animation-name:divider;
+    animation-duration: 4s;
+    animation-delay:250mss;
+    animation-iteration-count: 1;
+    border-radius: 100%;
+    background-color: yellow;
+    animation-iteration-count: infinite;
+    
+
+  }
+
+  @keyframes divider {
+    from {
+      margin-left: 0;
+
+    }
+
+    to {
+      margin-left: 100px
+    }
+  }
+}

@@ -1,11 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import { FormPage } from "../pages/form/form";
+import Contact from "../pages/contact/Contact";
+import AnimationPage from "../pages/animation/Animation";
+import { AppLayout } from "../components/layouts/app-layout";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <AppLayout />,
     children: [
       {
         path: "/tab1",
@@ -40,5 +43,14 @@ export const router = createBrowserRouter([
     path:"/form", 
     element:<FormPage />
 
+  }, 
+  {
+    path:"/contact", 
+    element:<Contact />
+  }, 
+
+  {
+    path:"/animation", 
+    element:<AnimationPage />
   }
 ]);

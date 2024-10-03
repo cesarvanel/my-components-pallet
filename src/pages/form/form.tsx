@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import { InputForm } from "../../components/input-form/inputForm";
 import { InputSelectForm } from "../../components/input-select/InputSelect";
 import PrimaryButton from "../../components/button/primary-button/PrimaryButton";
@@ -13,6 +13,14 @@ const options: OptionSelect[] = [
 ];
 
 export const FormPage: React.FC = () => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+
+    for (const [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+  };
 
   return (
     <section
@@ -23,7 +31,8 @@ export const FormPage: React.FC = () => {
         minHeight: "100vh",
       }}
     >
-      <div
+      <form
+        onSubmit={handleSubmit}
         style={{
           maxWidth: 480,
           display: "flex",
@@ -53,6 +62,7 @@ export const FormPage: React.FC = () => {
           }}
           label="Email"
           placeholder="Email"
+          name="email"
         />
 
         <InputForm
@@ -60,12 +70,10 @@ export const FormPage: React.FC = () => {
           label="Password"
           type="password"
           placeholder="Password"
+          name="password"
         />
 
-        <InputSelectForm
-          options={options}
-          label="Year of experience  "
-        />
+        <InputSelectForm  options={options} label="Year of experience  " />
 
         <div
           style={{
@@ -73,11 +81,11 @@ export const FormPage: React.FC = () => {
             width: "100%",
           }}
         >
-          <InputCheckbox label="Remember Me" />
+          <InputCheckbox label="Remember Me"  name="remember" />
         </div>
 
-        <PrimaryButton type="button" label="Create Account" />
-      </div>
+        <PrimaryButton type="submit" label="Create Account" />
+      </form>
     </section>
   );
 };
