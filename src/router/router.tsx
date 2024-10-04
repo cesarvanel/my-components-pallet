@@ -8,7 +8,7 @@ import { AppLayout } from "../components/layouts/app-layout";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <AppLayout />,
+    element: <App />,
     children: [
       {
         path: "/tab1",

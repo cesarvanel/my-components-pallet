@@ -1,29 +1,17 @@
+import { Outlet } from "react-router-dom";
+import { Sidebar } from "../sidebar/sidebar";
 import styles from "./app-layout.module.scss";
 
 export const AppLayout = () => {
   return (
-    <div className={styles["AppLayout"]}>
-      <div
-        style={{
-          backgroundColor: "red",
-        }}
-      >
-        sidebar
-      </div>
+    <main className={styles["AppLayout"]}>
+      <Sidebar />
 
-      <main
-        style={{
-          backgroundColor: "black",
-          position:"fixed", 
-          marginLeft:250, 
-          height:"100%",
-          width:"100%"
-        }}
-      >
-        <div>navBar</div>
+      <section className={styles["wrapper"]}>
+        <div>hello</div>
 
-        <div>main</div>
-      </main>
-    </div>
+        <Outlet />
+      </section>
+    </main>
   );
 };
