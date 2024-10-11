@@ -15,6 +15,8 @@ export const useModal = ({
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
+
+    if(!modalId) return
     const handleOpenModalByEvent = (id: string) => {
       if (id === modalId) {
         handleOpenModal();
@@ -27,7 +29,6 @@ export const useModal = ({
       const id = args.key as string;
       handleOpenModalByEvent(id);
     });
-
     return () => {
       eventsEmitter.off("APP-MODAL", handleOpenModalByEvent);
     };
