@@ -1,15 +1,26 @@
-import React, { FormEvent } from "react";
+import React, { FormEvent, useState } from "react";
 import { InputForm } from "../../components/input-form/inputForm";
-import { InputSelectForm } from "../../components/input-select/InputSelect";
+
 import PrimaryButton from "../../components/button/primary-button/PrimaryButton";
 import { OptionSelect } from "../../utils/type/type";
 import InputCheckbox from "../../components/checkbox/Checkbox";
+import {
+  InputSelectWithMultipleType,
+  SelectOption,
+} from "../../components/input-select-with-multiple/InputSelectWithMultipleType";
+import { InputSelectForm } from "../../components/input-select/InputSelect";
 
 const options: OptionSelect[] = [
   { id: 1, label: "Option 1" },
   { id: 2, label: "Option 2" },
   { id: 3, label: "Option 3" },
   { id: 4, label: "Option 4" },
+];
+
+const optionsWithMultiple = [
+  { label: "Option 1", value: "1" },
+  { label: "Option 2", value: "2" },
+  { label: "Option 3", value: "3" },
 ];
 
 export const FormPage: React.FC = () => {
@@ -21,6 +32,10 @@ export const FormPage: React.FC = () => {
       console.log(`${key}: ${value}`);
     }
   };
+
+  const [selectedOption, setSelectedOption] = useState<SelectOption>();
+
+  console.log("selectedOption", selectedOption);
 
   return (
     <section
@@ -73,7 +88,7 @@ export const FormPage: React.FC = () => {
           name="password"
         />
 
-        <InputSelectForm  options={options} label="Year of experience  " />
+        <InputSelectForm options={options} label="Year of experience  " />
 
         <div
           style={{
@@ -81,10 +96,18 @@ export const FormPage: React.FC = () => {
             width: "100%",
           }}
         >
-          <InputCheckbox label="Remember Me"  name="remember" />
+          <InputCheckbox label="Remember Me" name="remember" />
         </div>
 
         <PrimaryButton type="submit" label="Create Account" />
+
+        <InputSelectWithMultipleType
+          options={optionsWithMultiple}
+          value={selectedOption}
+          onChange={(option) => {
+            setSelectedOption(option);
+          }}
+        />
       </form>
     </section>
   );

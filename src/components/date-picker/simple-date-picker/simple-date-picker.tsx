@@ -20,9 +20,13 @@ interface OwnProps {
   onRangeSelect?: (start: Date | null, end: Date | null) => void;
   minDate?: Date;
   maxDate?: Date;
+  leftIcon?: React.ReactElement;
+  rightIcon?: React.ReactElement;
+  styles?: React.CSSProperties;
 }
 
 export const SimpleDatePicker: React.FC<OwnProps> = (props) => {
+  const { leftIcon, rightIcon } = props;
   const {
     handleNextMonth,
     handleDayClick,
@@ -38,6 +42,7 @@ export const SimpleDatePicker: React.FC<OwnProps> = (props) => {
     currentMonth,
     currentYear,
   } = useSimpleDatePicker(props);
+
   const [dropDownIsOpen, setDropDownIsOpen] = useState<boolean>(false);
 
   const handleSelectMonth = (month: number) => {
@@ -54,7 +59,7 @@ export const SimpleDatePicker: React.FC<OwnProps> = (props) => {
       <div role="button" {...className("content")}>
         <div className={styles["grid-one"]}>
           <button onClick={handlePrevMonth} className={styles["icon"]}>
-            <LeftIcon />
+            {leftIcon ?? <LeftIcon />}
           </button>
 
           <div className={styles["middle"]}>
@@ -98,7 +103,7 @@ export const SimpleDatePicker: React.FC<OwnProps> = (props) => {
           </div>
 
           <button onClick={handleNextMonth} className={styles["icon"]}>
-            <RightIcon />
+            {rightIcon ?? <RightIcon />}
           </button>
         </div>
 

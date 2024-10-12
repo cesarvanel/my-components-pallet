@@ -1,6 +1,6 @@
-.InputSelectForm {
-  width: 100%;
+.InputSelectWithMultipleType {
   position: relative;
+  width: 100%;
   color: #333333;
 
   label {
@@ -10,17 +10,21 @@
     margin-bottom: 12px;
     font-family: "Medium";
   }
-  .customInputSelect {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 2px solid #dddddd;
-    border-radius: 8px;
+
+  .customInput {
     height: 40px;
+    width: 100%;
+    border: 2px solid #dddddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
+    border-radius: 8px;
+
     input {
-      border: none;
+      border: 0;
       width: 100%;
+      border: none;
       outline: none;
       padding-left: 15px;
       font-size: 14px;
@@ -31,28 +35,10 @@
         font-family: "Regular";
         color: #bbbbbb;
       }
-
-      &.withSearchIcon {
-        padding-left: 40px;
-        &::placeholder {
-          font-size: 14px;
-          font-family: "Regular";
-          color: #bbbbbb;
-        }
-      }
-
-      &:disabled {
-        background-color: #dddddd;
-
-        &::placeholder {
-          color: #666666;
-        }
-      }
     }
 
     &.disabled {
       background-color: #dddddd;
-      cursor: auto;
 
       &::placeholder {
         color: #666666;
@@ -89,6 +75,7 @@
     }
   }
 
+
   .errormessage {
     display: flex;
     align-items: center;
@@ -99,7 +86,7 @@
     color: #d44848;
   }
 
-  .customSelectOptions {
+  .customOptions{
     position: absolute;
     top: 100%;
     left: 0;
@@ -118,6 +105,7 @@
       }
 
       &.active{
+
         background-color: #1F81B9;
 
       }
