@@ -1,6 +1,5 @@
-import { EventEmitter } from "events";
 
-class AppEventEmitter extends EventEmitter {
+class AppEventEmitter extends Window {
   private static instance: AppEventEmitter;
   static eventEMitterInstance() {
     if (this.instance) {

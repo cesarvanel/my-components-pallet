@@ -1,5 +1,4 @@
 import { Button } from "../../components/button/button";
-import eventsEmitter from "../../events/EventEmitter";
 
 const Contact = () => {
   return (
@@ -18,11 +17,11 @@ const Contact = () => {
         style={{
           padding: 10,
         }}
-        onClick={() =>
-          eventsEmitter.emit("APP-MODAL", {
-            key:"123456"
-          })
-        }
+        // onClick={() =>
+        //   eventsEmitter.emit("APP-MODAL", {
+        //     key:"123456"
+        //   })
+        // }
       >
         Open App Modal
       </Button>

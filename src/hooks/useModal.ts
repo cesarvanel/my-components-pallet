@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import eventsEmitter from "../events/EventEmitter";
+import { useState } from "react";
 
 interface useModalBehavior {
   isModalOpen: boolean;
@@ -14,25 +13,25 @@ export const useModal = ({
 }): useModalBehavior => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    if(!modalId) return
-    const handleOpenModalByEvent = (id: string) => {
-      if (id === modalId) {
-        handleOpenModal();
-      }
+  //   if(!modalId) return
+  //   const handleOpenModalByEvent = (id: string) => {
+  //     if (id === modalId) {
+  //       handleOpenModal();
+  //     }
 
-      handleOpenModal();
-    };
+  //     handleOpenModal();
+  //   };
 
-    eventsEmitter.on("APP-MODAL", (args) => {
-      const id = args.key as string;
-      handleOpenModalByEvent(id);
-    });
-    return () => {
-      eventsEmitter.off("APP-MODAL", handleOpenModalByEvent);
-    };
-  }, [modalId]);
+  //   eventsEmitter.on("APP-MODAL", (args) => {
+  //     const id = args.key as string;
+  //     handleOpenModalByEvent(id);
+  //   });
+  //   return () => {
+  //     eventsEmitter.off("APP-MODAL", handleOpenModalByEvent);
+  //   };
+  // }, [modalId]);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);

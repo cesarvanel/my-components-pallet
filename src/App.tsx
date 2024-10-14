@@ -21,15 +21,15 @@ const App = () => {
   const [showDoubleCalendar, setShowDoubleCalendar] = useState<boolean>(false);
 
   const [showPresetRange, setShowPresetRange] = useState<boolean>(false);
-  const [selectedDateValue, setSelectedDateValues] =
-    useState<MultipleDateType>({rangeEnd:null, rangeStart:null});
+  const [selectedDateValue, setSelectedDateValues] = useState<MultipleDateType>(
+    { rangeEnd: null, rangeStart: null }
+  );
 
   const dropDownBehavior = useDropDown();
 
   const modal = useModal({ modalId: "123456" });
 
-
-  console.log('selectedDateValue', selectedDateValue)
+  console.log("selectedDateValue", selectedDateValue);
 
   return (
     <div>
@@ -114,8 +114,8 @@ const App = () => {
           isOpen={showPopOver}
           value={selectedDateValue}
           rangeMode
-          onChange={( rangeStart, rangeEnd) => {
-            setSelectedDateValues({rangeStart,rangeEnd})
+          onChange={(rangeStart, rangeEnd) => {
+            setSelectedDateValues({ rangeStart, rangeEnd });
           }}
         />
       </PopOver>
@@ -131,7 +131,10 @@ const App = () => {
         >
           <DoubleDatePicker
             isOpen={showDoubleCalendar}
-            onRangeSelect={() => {}}
+            onChange={(rangeStart, rangeEnd) => {
+              setSelectedDateValues({ rangeStart, rangeEnd });
+            }}
+            value={selectedDateValue}
           />
         </PopOver>
       </div>
@@ -140,7 +143,13 @@ const App = () => {
         isOpen={showPresetRange}
         onClose={() => setShowPresetRange(false)}
       >
-        <DateRangePreset isOpen={showPresetRange} />
+        <DateRangePreset
+          onChange={(rangeStart, rangeEnd) => {
+            setSelectedDateValues({ rangeStart, rangeEnd });
+          }}
+          value={selectedDateValue}
+          isOpen={showPresetRange}
+        />
       </PopOver>
 
       <NavBar />

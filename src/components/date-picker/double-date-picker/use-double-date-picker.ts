@@ -20,7 +20,6 @@ export interface useDoubleDatePickerBehavior {
   ) => boolean;
   handleChangeCurrentMonth: (month: number) => void;
   isRangeEndSelected: (date: DoubleCalendarDayModel) => boolean;
-  handleGetSelectedDate: (date: DoubleCalendarDayModel) => boolean;
   isRangeStartSelected: (date: DoubleCalendarDayModel) => boolean;
   handleDisabledWithOrMaxDate: (date: DoubleCalendarDayModel) => boolean;
   isInRange: (dayDate: DoubleCalendarDayModel) => boolean;
@@ -30,14 +29,16 @@ export interface useDoubleDatePickerBehavior {
 
 export interface DoubleDatePickerProps {
   isOpen: boolean;
-  onRangeSelect: (start: Date | null, end: Date | null) => void;
+  onChange: (start: Date | null, end: Date | null) => void;
+  value:{rangeStart:Date | null ; rangeEnd:Date | null}
   minDate?: Date;
   maxDate?: Date;
 }
 
 export const useDoubleDatePicker = ({
   isOpen,
-  onRangeSelect,
+  onChange,
+  value,
   maxDate,
   minDate,
 }: DoubleDatePickerProps): useDoubleDatePickerBehavior => {
@@ -48,12 +49,6 @@ export const useDoubleDatePicker = ({
   const [currentYear, setCurrentYear] = useState<number>(
     new Date().getFullYear()
   );
-
-  const [selectedDate, setSelectedDate] = useState<Date | null>();
-
-  const [rangeStart, setRangeStart] = useState<Date | null>(null);
-  const [rangeEnd, setRangeEnd] = useState<Date | null>(null);
-
   const today = new Date();
   const todayDay = today.getDate();
   const todayMonth = today.getMonth();
@@ -100,32 +95,21 @@ export const useDoubleDatePicker = ({
     e.stopPropagation();
 
     if(!day.isCurrentMonth) return
+
+    const {rangeStart, rangeEnd} = value
     
     if (!rangeStart || (rangeStart && rangeEnd)) {
-      setRangeStart(day.date);
-      setRangeEnd(null);
-      onRangeSelect(day.date, null);
+  
+      onChange(day.date, null);
       return;
     }
     if (rangeStart && !rangeEnd) {
       if (day.date < rangeStart) {
-        setRangeEnd(rangeStart);
-        setRangeStart(day.date);
-        onRangeSelect(day.date, rangeStart);
+        onChange(day.date, rangeStart);
         return;
       }
-      setRangeEnd(day.date);
-      onRangeSelect(rangeStart, day.date);
+      onChange(rangeStart, day.date);
     }
-  };
-
-  const handleGetSelectedDate = (date: DoubleCalendarDayModel): boolean => {
-    const isSelected =
-      !!selectedDate &&
-      selectedDate.getDate() === date.day && date.isCurrentMonth &&
-      selectedDate.getFullYear() === currentYear;
-
-    return isSelected;
   };
 
   const handleGetSelectedTodayDay = (
@@ -136,6 +120,8 @@ export const useDoubleDatePicker = ({
   };
 
   const isRangeStartSelected = (date: DoubleCalendarDayModel): boolean => {
+
+    const {rangeStart}  = value
     return (
       !!rangeStart &&
       rangeStart.getDate() === date.day &&date.isCurrentMonth && 
@@ -144,6 +130,7 @@ export const useDoubleDatePicker = ({
   };
 
   const isRangeEndSelected = (date: DoubleCalendarDayModel): boolean => {
+    const {rangeEnd}  = value
     return (
       !!rangeEnd &&
       rangeEnd.getDate() === date.day && date.isCurrentMonth && 
@@ -156,6 +143,7 @@ export const useDoubleDatePicker = ({
   };
 
   const isInRange = (dayDate: DoubleCalendarDayModel) => {
+    const {rangeStart, rangeEnd}  = value
     return (
       !!rangeStart &&
       !!rangeEnd &&
@@ -165,11 +153,9 @@ export const useDoubleDatePicker = ({
   };
 
   const handleCleanRange = () => {
-    setRangeEnd(null);
-    setRangeStart(null);
-    setSelectedDate(null);
     setCurrentMonth(todayMonth);
     setCurrentYear(todayYear);
+    onChange(null, null)
   };
 
   const getCalendarDays = (date: Date): DoubleCalendarDayModel[] => {
@@ -237,7 +223,6 @@ export const useDoubleDatePicker = ({
     handleDayClick,
     handleGetSelectedTodayDay,
     handleChangeCurrentMonth,
-    handleGetSelectedDate,
     isRangeEndSelected,
     isRangeStartSelected,
     handleDisabledWithOrMaxDate,

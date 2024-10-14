@@ -17,12 +17,13 @@ const className = classNameModule(styles);
 
 export interface OwnProps {
   isOpen: boolean;
-  onRangeDateChange?: (startDate: Date | null, endDate: Date | null) => void;
+  onChange: (start: Date | null, end: Date | null) => void;
+  value:{rangeStart:Date | null ; rangeEnd:Date | null};
   minDate?: Date;
   maxDate?: Date;
 }
 export const DateRangePreset: React.FC<OwnProps> = (props) => {
-  const { isOpen, onRangeDateChange, maxDate, minDate } = props;
+  const { isOpen, onChange,value, maxDate, minDate } = props;
 
   const [currentMonth, setCurrentMonth] = useState<number>(
     new Date().getMonth()
@@ -33,10 +34,6 @@ export const DateRangePreset: React.FC<OwnProps> = (props) => {
   );
 
   const [selectedPreset, setSelectedPreset] = useState<number>(0);
-  const [selectedDate, setSelectedDate] = useState<Date | null>();
-
-  const [rangeStart, setRangeStart] = useState<Date | null>(null);
-  const [rangeEnd, setRangeEnd] = useState<Date | null>(null);
 
   const today = new Date();
   const todayDay = today.getDate();
@@ -45,8 +42,7 @@ export const DateRangePreset: React.FC<OwnProps> = (props) => {
 
   const applyPreset = (preset: keyof typeof DatePresets) => {
     const [startDate, endDate] = DatePresets[preset];
-    setRangeStart(startDate);
-    setRangeEnd(endDate);
+    onChange(startDate, endDate)
   };
 
   const handleNextMonth = () => {
@@ -91,33 +87,20 @@ export const DateRangePreset: React.FC<OwnProps> = (props) => {
 
     if (!day.isCurrentMonth) return;
 
+    const {rangeStart,rangeEnd} = value
     if (!rangeStart || (rangeStart && rangeEnd)) {
-      setRangeStart(day.date);
-      setRangeEnd(null);
-      onRangeDateChange?.(day.date, null);
+      onChange(day.date, null);
       return;
     }
     if (rangeStart && !rangeEnd) {
       if (day.date < rangeStart) {
-        setRangeEnd(rangeStart);
-        setRangeStart(day.date);
-        onRangeDateChange?.(day.date, rangeStart);
+        onChange(day.date, rangeStart);
         return;
       }
-      setRangeEnd(day.date);
-      onRangeDateChange?.(rangeStart, day.date);
+      onChange(rangeStart, day.date);
     }
   };
 
-  const handleGetSelectedDate = (date: DoubleCalendarDayModel): boolean => {
-    const isSelected =
-      !!selectedDate &&
-      selectedDate.getDate() === date.day &&
-      date.isCurrentMonth &&
-      selectedDate.getFullYear() === currentYear;
-
-    return isSelected;
-  };
 
   const handleGetSelectedTodayDay = (
     date: DoubleCalendarDayModel,
@@ -128,37 +111,35 @@ export const DateRangePreset: React.FC<OwnProps> = (props) => {
 
   const isRangeStartSelected = (date: DoubleCalendarDayModel): boolean => {
     return (
-      !!rangeStart &&
-      rangeStart.getDate() === date.day &&
+      !!value.rangeStart &&
+      value.rangeStart.getDate() === date.day &&
       date.isCurrentMonth &&
-      rangeStart.getMonth() === date.date.getMonth()
+      value.rangeStart.getMonth() === date.date.getMonth()
     );
   };
 
   const isRangeEndSelected = (date: DoubleCalendarDayModel): boolean => {
     return (
-      !!rangeEnd &&
-      rangeEnd.getDate() === date.day &&
+      !!value.rangeEnd &&
+      value.rangeEnd.getDate() === date.day &&
       date.isCurrentMonth &&
-      rangeEnd.getMonth() === date.date.getMonth()
+      value.rangeEnd.getMonth() === date.date.getMonth()
     );
   };
 
   const isInRange = (dayDate: DoubleCalendarDayModel) => {
     return (
-      !!rangeStart &&
-      !!rangeEnd &&
-      dayDate.date > rangeStart &&
-      dayDate.date < rangeEnd
+      !!value.rangeStart &&
+      !!value.rangeEnd &&
+      dayDate.date > value.rangeStart &&
+      dayDate.date < value.rangeEnd
     );
   };
 
   const handleCleanRange = () => {
-    setRangeEnd(null);
-    setRangeStart(null);
-    setSelectedDate(null);
     setCurrentMonth(todayMonth);
     setCurrentYear(todayYear);
+    onChange(null, null)
   };
 
   const getCalendarDays = (date: Date): DoubleCalendarDayModel[] => {
@@ -303,7 +284,6 @@ export const DateRangePreset: React.FC<OwnProps> = (props) => {
                   {...className("day-value", {
                     "prev-month": !date.isCurrentMonth,
                     "next-month": !date.isCurrentMonth,
-                    "active-day": handleGetSelectedDate(date),
                     "today-day": isToday && date.isCurrentMonth,
                     "in-range": isInRange(date),
                     "is-range-or-end-selected":
@@ -366,7 +346,6 @@ export const DateRangePreset: React.FC<OwnProps> = (props) => {
                     {...className("day-value", {
                       "prev-month": !date.isCurrentMonth,
                       "next-month": !date.isCurrentMonth,
-                      "active-day": handleGetSelectedDate(date),
                       "today-day": isToday && date.isCurrentMonth,
                       "in-range": isInRange(date),
                       "is-range-or-end-selected":
