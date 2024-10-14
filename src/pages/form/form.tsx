@@ -88,7 +88,9 @@ export const FormPage: React.FC = () => {
           name="password"
         />
 
-        <InputSelectForm options={options} label="Year of experience  " />
+        <InputSelectForm onChange={() =>{
+
+        }} options={options} label="Year of experience  " />
 
         <div
           style={{

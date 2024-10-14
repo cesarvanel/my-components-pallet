@@ -10,7 +10,8 @@ import { AlertIcon } from "../icons/AlertIcon";
 
 interface InputSelectFormProps {
   options: OptionSelect[];
-  handleChangeOption?: (option: OptionSelect) => void;
+  value?:OptionSelect| undefined;
+  onChange: (option?: OptionSelect) => void;
   handleSearch?: (value: string) => void;
   search?: string;
   label?: string;
@@ -29,23 +30,21 @@ export const InputSelectForm: React.FC<InputSelectFormProps> = ({
   disabled,
   search,
   placeHolder,
-  handleChangeOption,
+  value,
+  onChange,
   handleSearch,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const [searchValue, setSearchValue] = useState<string>(search ?? "");
 
-  const [selectedOption, setSelectedOption] = useState<OptionSelect>();
-
   const [activeOptionIndex, setActiveOptionIndex] = useState<number>();
 
   const ref = useClickOutSide<HTMLDivElement>(() => setIsOpen(false));
 
   const handleSelectOption = (option: OptionSelect, index: number) => {
-    setSelectedOption(option);
     setActiveOptionIndex(index);
-    handleChangeOption?.(option);
+    onChange(option);
     setIsOpen(false);
   };
 
@@ -53,9 +52,9 @@ export const InputSelectForm: React.FC<InputSelectFormProps> = ({
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     e.stopPropagation();
-    setSelectedOption(undefined);
     setSearchValue("");
     setActiveOptionIndex(undefined);
+    onChange(undefined)
   };
 
   const onInputTextChange = (query: string) => {
@@ -89,7 +88,7 @@ export const InputSelectForm: React.FC<InputSelectFormProps> = ({
         break;
       case "Enter":
         if (activeOptionIndex !== undefined) {
-          setSelectedOption(options[activeOptionIndex]);
+          onChange(options[activeOptionIndex]);
           setIsOpen(false);
         }
         break;
@@ -114,14 +113,14 @@ export const InputSelectForm: React.FC<InputSelectFormProps> = ({
       >
         <input
           type="text"
-          value={selectedOption?.label || searchValue}
+          value={value?.label|| searchValue}
           onChange={(e) => onInputTextChange(e.target.value)}
           placeholder={placeHolder ?? "Select an option..."}
           {...className("", { withSearchIcon: withSearchIcon ?? false })}
           disabled={disabled}
         />
         <span {...className("arrow", { open: isOpen })}>
-          {(!!selectedOption || !!searchValue) && (
+          {(!!value || !!searchValue) && (
             <div onClick={(e) => handleCleanOptionSelect(e)}>
               <CleanFieldIcon />
             </div>

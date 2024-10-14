@@ -45,9 +45,6 @@ export const InputSelectWithMultipleType: React.FC<SelectProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const [selectedOption, setSelectedOption] = useState<
-    SelectOption | undefined
-  >();
   const [searchValue, setSearchValue] = useState<string>("");
 
   const [activeOptionIndex, setActiveOptionIndex] = useState<number>();
@@ -58,7 +55,6 @@ export const InputSelectWithMultipleType: React.FC<SelectProps> = ({
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     e.stopPropagation();
-    setSelectedOption(undefined);
     setSearchValue("");
     setActiveOptionIndex(undefined);
     multiple ? onChange([]) : onChange(undefined);
@@ -72,12 +68,18 @@ export const InputSelectWithMultipleType: React.FC<SelectProps> = ({
       }
     } else {
       if (option !== value) {
-
-         console.log('option', option)
-        onChange(value);
-        setSelectedOption(option);
+        onChange(option);
       }
     }
+  };
+
+  const handleChangeOption = (option: SelectOption, index: number) => {
+    handleSelectOption(option), setActiveOptionIndex(index);
+    setIsOpen(false);
+  };
+
+  const isOptionSelected = (option: SelectOption) => {
+    return multiple ? value.includes(option) : option === value;
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -102,7 +104,7 @@ export const InputSelectWithMultipleType: React.FC<SelectProps> = ({
         break;
       case "Enter":
         if (activeOptionIndex !== undefined) {
-          setSelectedOption(options[activeOptionIndex]);
+          handleSelectOption(options[activeOptionIndex]);
           setIsOpen(false);
         }
         break;
@@ -133,13 +135,13 @@ export const InputSelectWithMultipleType: React.FC<SelectProps> = ({
           type="text"
           placeholder="Select an option"
           onChange={(e) => setSearchValue(e.target.value)}
-          value={selectedOption?.label || searchValue}
+          value={multiple ? "" : value?.label || searchValue}
           disabled={disabled}
           {...className("", { withSearchIcon: withSearchIcon ?? false })}
         />
 
         <span {...className("arrow", { open: isOpen })}>
-          {(!!selectedOption || !!searchValue) && (
+          {(!!value || !!searchValue) && (
             <div onClick={(e) => handleCleanOptionSelect(e)}>
               <CleanFieldIcon />
             </div>
@@ -155,9 +157,9 @@ export const InputSelectWithMultipleType: React.FC<SelectProps> = ({
               <div
                 key={option.value}
                 {...className("option", {
-                  active: index === activeOptionIndex,
+                  active: isOptionSelected(option) || index === activeOptionIndex ,
                 })}
-                onClick={() => handleSelectOption(option)}
+                onClick={() => handleChangeOption(option, index)}
               >
                 {option.label}
               </div>
