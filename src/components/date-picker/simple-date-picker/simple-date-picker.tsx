@@ -13,19 +13,30 @@ import { PopOver } from "../../pop-over/pop-over";
 
 const className = classNameModule(styles);
 
-interface OwnProps {
-  isOpen: boolean;
-  rangeMode?: boolean;
-  onDateSelect?: (date: Date | null) => void;
-  onRangeSelect?: (start: Date | null, end: Date | null) => void;
-  minDate?: Date;
-  maxDate?: Date;
-  leftIcon?: React.ReactElement;
-  rightIcon?: React.ReactElement;
-  styles?: React.CSSProperties;
-}
 
-export const SimpleDatePicker: React.FC<OwnProps> = (props) => {
+type SingleRangePropsType = {
+  rangeMode?: false;
+  onChange:(date?:Date) => void, 
+  value?:Date
+ }
+ export type MultipleDateType = {rangeStart:  Date | null , rangeEnd:  Date | null}
+
+
+type MultipleRangePropsType = {
+  rangeMode: true;
+  onChange:(startDate: Date | null, endDate: Date | null) => void, 
+  value:MultipleDateType
+ }
+export  type  SimpleDatePickerProps =  {
+   isOpen: boolean;
+   minDate?: Date;
+   maxDate?: Date;
+   leftIcon?: React.ReactElement;
+   rightIcon?: React.ReactElement;
+   styles?: React.CSSProperties;
+ } & (SingleRangePropsType | MultipleRangePropsType )
+ 
+export const SimpleDatePicker: React.FC<SimpleDatePickerProps> = (props) => {
   const { leftIcon, rightIcon } = props;
   const {
     handleNextMonth,

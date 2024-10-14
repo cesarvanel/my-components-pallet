@@ -29,6 +29,7 @@ type SelectProps = {
   errorMessage?: string;
   withSearchIcon?: boolean;
   label?: string;
+  placeHolder?:string;
 } & (SingleSelectProps | MultipleSelectProps);
 
 const className = classNameModule(styles);
@@ -42,6 +43,7 @@ export const InputSelectWithMultipleType: React.FC<SelectProps> = ({
   errorMessage,
   withSearchIcon,
   label,
+  placeHolder
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -73,9 +75,9 @@ export const InputSelectWithMultipleType: React.FC<SelectProps> = ({
     }
   };
 
-  const handleChangeOption = (option: SelectOption, index: number) => {
-    handleSelectOption(option), setActiveOptionIndex(index);
-    setIsOpen(false);
+  const handleChangeOption = (option: SelectOption) => {
+    handleSelectOption(option), setIsOpen(false);
+    setActiveOptionIndex(undefined);
   };
 
   const isOptionSelected = (option: SelectOption) => {
@@ -103,12 +105,16 @@ export const InputSelectWithMultipleType: React.FC<SelectProps> = ({
         );
         break;
       case "Enter":
+        event.preventDefault();
         if (activeOptionIndex !== undefined) {
           handleSelectOption(options[activeOptionIndex]);
+          setActiveOptionIndex(undefined)
           setIsOpen(false);
         }
         break;
       case "Escape":
+        event.preventDefault();
+        setActiveOptionIndex(undefined)
         setIsOpen(false);
         break;
     }
@@ -121,6 +127,27 @@ export const InputSelectWithMultipleType: React.FC<SelectProps> = ({
   return (
     <div ref={ref} className={styles["InputSelectWithMultipleType"]}>
       <label htmlFor="">{label}</label>
+
+      <div className={styles["selected-option"]}>
+        {multiple && value.length > 0
+          ? value.map((option) => {
+              return (
+                <button key={option.value}>
+                  <span>{option.label}</span>
+                  <span
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleChangeOption(option);
+                    }}
+                  >
+                    <CleanFieldIcon />
+                  </span>
+                </button>
+              );
+            })
+          : null}
+      </div>
+
       <div
         {...className("customInput", {
           open: isOpen,
@@ -133,7 +160,7 @@ export const InputSelectWithMultipleType: React.FC<SelectProps> = ({
       >
         <input
           type="text"
-          placeholder="Select an option"
+          placeholder={placeHolder ??"Select an option"}
           onChange={(e) => setSearchValue(e.target.value)}
           value={multiple ? "" : value?.label || searchValue}
           disabled={disabled}
@@ -141,7 +168,8 @@ export const InputSelectWithMultipleType: React.FC<SelectProps> = ({
         />
 
         <span {...className("arrow", { open: isOpen })}>
-          {(!!value || !!searchValue) && (
+          {((multiple ? value.length !== 0 : value?.label) ||
+            !!searchValue) && (
             <div onClick={(e) => handleCleanOptionSelect(e)}>
               <CleanFieldIcon />
             </div>
@@ -151,23 +179,26 @@ export const InputSelectWithMultipleType: React.FC<SelectProps> = ({
       </div>
 
       {isOpen && (
-        <div className={styles["customOptions"]}>
+        <ul className={styles["customOptions"]}>
           {filteredOptions.length > 0 ? (
             filteredOptions.map((option, index) => (
-              <div
+              <li
                 key={option.value}
                 {...className("option", {
-                  active: isOptionSelected(option) || index === activeOptionIndex ,
+                  active: isOptionSelected(option),
+                  key: activeOptionIndex === index,
                 })}
-                onClick={() => handleChangeOption(option, index)}
+                onClick={() => handleChangeOption(option)}
+                onMouseEnter={() => setActiveOptionIndex(index)}
+                onMouseLeave={() => setActiveOptionIndex(undefined)}
               >
                 {option.label}
-              </div>
+              </li>
             ))
           ) : (
             <div className={styles["no-options"]}>No options found</div>
           )}
-        </div>
+        </ul>
       )}
     </div>
   );

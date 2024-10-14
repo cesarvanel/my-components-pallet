@@ -12,6 +12,7 @@ interface InputFormProps extends ComponentProps<"input"> {
   type?: React.HTMLInputTypeAttribute;
   errorMessage?: string;
   description?: string;
+  value?: string | number;
 }
 
 const className = classNameModule(styles);
@@ -22,6 +23,7 @@ export const InputForm: React.FC<InputFormProps> = ({
   customStyles,
   errorMessage,
   description,
+  value,
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -39,17 +41,20 @@ export const InputForm: React.FC<InputFormProps> = ({
         <span>{description}</span>
       </div>
 
-      {isPasswordType && (
-        <div onClick={togglePassword} className={styles["svg-container"]}>
-          {!showPassword ? <EyeIcon /> : <OpenEyeIcon />}
-        </div>
-      )}
+      <div className={styles["form-container"]}>
+        <input
+          type={showPassword ? "password" :("text")}
+          {...props}
+          {...className("", { error: !!errorMessage })}
+          value={value}
+        />
 
-      <input
-        type={showPassword ? "password" : "text" ?? type}
-        {...props}
-        {...className("", { error: !!errorMessage })}
-      />
+        {isPasswordType && (
+          <div onClick={togglePassword} className={styles["svg-container"]}>
+            {!showPassword ? <EyeIcon /> : <OpenEyeIcon />}
+          </div>
+        )}
+      </div>
 
       {!!errorMessage && (
         <div id="error" className={styles["errormessage"]}>

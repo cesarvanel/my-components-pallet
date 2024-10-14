@@ -1,17 +1,16 @@
 .InputForm {
   display: flex;
   flex-direction: column;
-  width: 100%;
   position: relative;
+  width: 100%;
 
-  .text-container{
-    
+  .text-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    span{
-      color:#AAAAAA;
+    span {
+      color: #aaaaaa;
       font-size: 14px;
       font-family: "Regular";
       font-weight: 400;
@@ -24,16 +23,7 @@
     }
   }
 
-  .svg-container {
-    svg {
-      position: absolute;
-      right: 20px;
-      top: 43px;
-      width: 16px;
-      height: 16px;
-      cursor: pointer;
-    }
-  }
+
 
   label {
     display: block;
@@ -43,36 +33,71 @@
     font-family: "Medium";
   }
 
-  input {
-    border: 2px solid #dddddd;
-    border-radius: 8px;
-    outline: none;
-    height: 40px;
-    font-weight: 500;
-    font-size: 16px;
-    font-family: "Medium";
-    padding-left: 16px;
 
-    &:focus {
+  .form-container {
+    position: relative;
+    width: 100%; 
+    display: flex;
+    align-items: center;
+
+    .svg-container {
+      position: absolute;
+      right: 16px;
+      cursor: pointer;
+      svg {
+        right: 20px;
+        top: 50%;
+        width: 16px;
+        height: 16px;
+   
+      }
+    }
+
+    .clear {
+      position: absolute;
+      top: 14.5px;
+      right: 10px;
+
+      svg {
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    input {
+      position: relative;
+      border: 2px solid #dddddd;
+      border-radius: 8px;
       outline: none;
-      border: 2px solid #1f81b9;
-    }
-
-    &.error {
-      border: 2px solid #d44848;
-    }
-
-    &::placeholder {
-      font-size: 14px;
-      font-family: "Regular";
-      color: #bbbbbb;
-    }
-
-    &:disabled {
-      background-color: #dddddd;
-
+      height: 40px;
+      font-weight: 500;
+      font-size: 16px;
+      font-family: "Medium";
+      width: 100%;
+      flex-grow: 1;
+      padding-left: 15px;
+      box-sizing: border-box;
+      &:focus {
+        outline: none;
+        border: 2px solid #1f81b9;
+      }
+  
+      &.error {
+        border: 2px solid #d44848;
+      }
+  
       &::placeholder {
-        color: #666666;
+        font-size: 14px;
+        font-family: "Regular";
+        color: #bbbbbb;
+      }
+  
+      &:disabled {
+        background-color: #dddddd;
+  
+        &::placeholder {
+          color: #666666;
+        }
       }
     }
   }

@@ -33,9 +33,9 @@ export const FormPage: React.FC = () => {
     }
   };
 
-  const [selectedOption, setSelectedOption] = useState<SelectOption>();
+  const [selectedOption, setSelectedOption] = useState<OptionSelect>();
 
-  console.log("selectedOption", selectedOption);
+  const [multipleOption, setMultipleOption] = useState<SelectOption[]>([])
 
   return (
     <section
@@ -82,15 +82,29 @@ export const FormPage: React.FC = () => {
 
         <InputForm
           description="At least 8 characters"
-          label="Password"
+          label=""
           type="password"
           placeholder="Password"
           name="password"
         />
 
-        <InputSelectForm onChange={() =>{
+        <InputSelectForm
+          value={selectedOption}
+          onChange={(option) => {
+            setSelectedOption(option);
+          }}
+          options={options}
+          label="Year of experience  "
+        />
 
-        }} options={options} label="Year of experience  " />
+        <InputSelectWithMultipleType
+          multiple
+          options={optionsWithMultiple}
+          value={multipleOption}
+          onChange={(option) => {
+            setMultipleOption(option);
+          }}
+        />
 
         <div
           style={{
@@ -102,14 +116,6 @@ export const FormPage: React.FC = () => {
         </div>
 
         <PrimaryButton type="submit" label="Create Account" />
-
-        <InputSelectWithMultipleType
-          options={optionsWithMultiple}
-          value={selectedOption}
-          onChange={(option) => {
-            setSelectedOption(option);
-          }}
-        />
       </form>
     </section>
   );

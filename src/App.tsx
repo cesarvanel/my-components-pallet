@@ -2,7 +2,10 @@ import { useState } from "react";
 import { PopOver } from "./components/pop-over/pop-over";
 import { DoubleDatePicker } from "./components/date-picker/double-date-picker/double-date-picker";
 import { DateRangePreset } from "./components/date-picker/date-range-preset/date-range-preset";
-import { SimpleDatePicker } from "./components/date-picker/simple-date-picker/simple-date-picker";
+import {
+  MultipleDateType,
+  SimpleDatePicker,
+} from "./components/date-picker/simple-date-picker/simple-date-picker";
 import { useDropDown } from "./components/drop-down/use-drop-down";
 import { DropDown } from "./components/drop-down/drop-down";
 import { Button } from "./components/button/button";
@@ -13,16 +16,20 @@ import { RadioGroup } from "./components/radio-group/radio-group";
 import ModalComponent from "./components/modal/modal";
 import { useModal } from "./hooks/useModal";
 
-
 const App = () => {
   const [showPopOver, setShowPopOver] = useState<boolean>(false);
   const [showDoubleCalendar, setShowDoubleCalendar] = useState<boolean>(false);
 
   const [showPresetRange, setShowPresetRange] = useState<boolean>(false);
+  const [selectedDateValue, setSelectedDateValues] =
+    useState<MultipleDateType>({rangeEnd:null, rangeStart:null});
 
   const dropDownBehavior = useDropDown();
 
-  const modal = useModal({modalId:"123456"})
+  const modal = useModal({ modalId: "123456" });
+
+
+  console.log('selectedDateValue', selectedDateValue)
 
   return (
     <div>
@@ -100,11 +107,17 @@ const App = () => {
         }}
       >
         Modal
-      
       </Button>
 
       <PopOver isOpen={showPopOver} onClose={() => setShowPopOver(false)}>
-        <SimpleDatePicker isOpen={showPopOver} rangeMode />
+        <SimpleDatePicker
+          isOpen={showPopOver}
+          value={selectedDateValue}
+          rangeMode
+          onChange={( rangeStart, rangeEnd) => {
+            setSelectedDateValues({rangeStart,rangeEnd})
+          }}
+        />
       </PopOver>
       <div
         style={{
@@ -143,11 +156,15 @@ const App = () => {
 
       <TabsWithOwlet tabItemsWithOWlet={tabItemsWithOWlet} />
 
-      <ModalComponent isOpen={modal.isModalOpen} closeModal={modal.handleCloseModal} >
-        
-        <div style={{
-          maxWidth:700
-        }}>
+      <ModalComponent
+        isOpen={modal.isModalOpen}
+        closeModal={modal.handleCloseModal}
+      >
+        <div
+          style={{
+            maxWidth: 700,
+          }}
+        >
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium,
           possimus minima? Amet libero reiciendis eum unde ullam, fuga
           repellendus sapiente corrupti officiis inventore quo praesentium

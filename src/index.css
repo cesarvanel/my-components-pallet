@@ -45,7 +45,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 }
-ol, ul {
+ol, ul,li {
 	list-style: none;
 }
 blockquote, q {
@@ -99,25 +99,23 @@ body {
     font-weight: 900;
 }
 
-/* width */
-::-webkit-scrollbar {
+
+/* ::-webkit-scrollbar {
   width: 4px;
   height: 15px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   background: #ADAFB3;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background: #888;
 }
 
-/* Handle on hover */
+
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
-}
+} */
 
 

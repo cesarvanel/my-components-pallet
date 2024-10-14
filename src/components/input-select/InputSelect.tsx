@@ -42,8 +42,7 @@ export const InputSelectForm: React.FC<InputSelectFormProps> = ({
 
   const ref = useClickOutSide<HTMLDivElement>(() => setIsOpen(false));
 
-  const handleSelectOption = (option: OptionSelect, index: number) => {
-    setActiveOptionIndex(index);
+  const handleSelectOption = (option: OptionSelect) => {
     onChange(option);
     setIsOpen(false);
   };
@@ -149,9 +148,12 @@ export const InputSelectForm: React.FC<InputSelectFormProps> = ({
               <div
                 key={option.id}
                 {...className("option", {
-                  active: index === activeOptionIndex,
+                  active: option.id === value?.id, 
+                  "current-index": index === activeOptionIndex
                 })}
-                onClick={() => handleSelectOption(option, index)}
+                onClick={() => handleSelectOption(option)}
+                onMouseEnter={() => setActiveOptionIndex(index)}
+                onMouseLeave={() => setActiveOptionIndex(undefined)}
               >
                 {option.label}
               </div>
