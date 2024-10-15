@@ -15,6 +15,8 @@ import { tabItemsWithOWlet } from "./utils/helper/tabs-data-helper";
 import { RadioGroup } from "./components/radio-group/radio-group";
 import ModalComponent from "./components/modal/modal";
 import { useModal } from "./hooks/useModal";
+import Disclosure from "./components/disclosure/disclosure";
+import DisclosureGroup from "./components/disclosure/disclosure-group";
 
 const App = () => {
   const [showPopOver, setShowPopOver] = useState<boolean>(false);
@@ -162,6 +164,12 @@ const App = () => {
       /> */}
 
       <RadioGroup />
+
+      <Disclosure defaultOpen title="sault les amis">
+        <p>This is the content for</p>
+      </Disclosure>
+
+      <DisclosureGroup />
 
       <TabsWithOwlet tabItemsWithOWlet={tabItemsWithOWlet} />
 
