@@ -19,11 +19,13 @@ const InputTextArea: React.FC<TextAreaInputPros> = ({
     <div className={styles["InputTextAreaFrom"]}>
       <label htmlFor="">{label}</label>
 
-      <textarea
-        {...props}
-        {...className({ error: !!errorMessage })}
-        placeholder="placeholder ..."
-      ></textarea>
+      <div className={styles["area-container"]}>
+        <textarea
+          {...props}
+          {...className({ error: !!errorMessage })}
+          placeholder="placeholder ..."
+        ></textarea>
+      </div>
       {!!errorMessage && (
         <div id="error" className={styles["errormessage"]}>
           <AlertIcon />

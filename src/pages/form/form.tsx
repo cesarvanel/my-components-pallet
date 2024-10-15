@@ -9,6 +9,7 @@ import {
   SelectOption,
 } from "../../components/input-select-with-multiple/InputSelectWithMultipleType";
 import { InputSelectForm } from "../../components/input-select/InputSelect";
+import InputTextArea from "../../components/input-text-area/InputTextArea";
 
 const options: OptionSelect[] = [
   { id: 1, label: "Option 1" },
@@ -116,6 +117,8 @@ export const FormPage: React.FC = () => {
         </div>
 
         <PrimaryButton type="submit" label="Create Account" />
+
+        <InputTextArea />
       </form>
     </section>
   );
