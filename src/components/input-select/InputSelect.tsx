@@ -99,7 +99,7 @@ export const InputSelectForm: React.FC<InputSelectFormProps> = ({
 
   return (
     <div ref={ref} className={styles["InputSelectForm"]}>
-      <label htmlFor="">{label}</label>
+         {label &&<label htmlFor="">{label}</label>}
       <div
         tabIndex={0}
         {...className("customInputSelect", {

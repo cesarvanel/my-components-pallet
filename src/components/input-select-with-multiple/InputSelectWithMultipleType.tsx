@@ -126,7 +126,7 @@ export const InputSelectWithMultipleType: React.FC<SelectProps> = ({
 
   return (
     <div ref={ref} className={styles["InputSelectWithMultipleType"]}>
-      <label htmlFor="">{label}</label>
+      {label &&<label htmlFor="">{label}</label>}
 
       <div className={styles["selected-option"]}>
         {multiple && value.length > 0

@@ -2,21 +2,12 @@ import React, { FormEvent, useState } from "react";
 import { InputForm } from "../../components/input-form/inputForm";
 
 import PrimaryButton from "../../components/button/primary-button/PrimaryButton";
-import { OptionSelect } from "../../utils/type/type";
 import InputCheckbox from "../../components/checkbox/Checkbox";
 import {
   InputSelectWithMultipleType,
   SelectOption,
 } from "../../components/input-select-with-multiple/InputSelectWithMultipleType";
-import { InputSelectForm } from "../../components/input-select/InputSelect";
-import InputTextArea from "../../components/input-text-area/InputTextArea";
 
-const options: OptionSelect[] = [
-  { id: 1, label: "Option 1" },
-  { id: 2, label: "Option 2" },
-  { id: 3, label: "Option 3" },
-  { id: 4, label: "Option 4" },
-];
 
 const optionsWithMultiple = [
   { label: "Option 1", value: "1" },
@@ -34,9 +25,8 @@ export const FormPage: React.FC = () => {
     }
   };
 
-  const [selectedOption, setSelectedOption] = useState<OptionSelect>();
 
-  const [multipleOption, setMultipleOption] = useState<SelectOption[]>([])
+  const [multipleOption, setMultipleOption] = useState<SelectOption[]>([]);
 
   return (
     <section
@@ -89,16 +79,8 @@ export const FormPage: React.FC = () => {
           name="password"
         />
 
-        <InputSelectForm
-          value={selectedOption}
-          onChange={(option) => {
-            setSelectedOption(option);
-          }}
-          options={options}
-          label="Year of experience  "
-        />
-
         <InputSelectWithMultipleType
+          label="Year of experience"
           multiple
           options={optionsWithMultiple}
           value={multipleOption}
@@ -117,8 +99,6 @@ export const FormPage: React.FC = () => {
         </div>
 
         <PrimaryButton type="submit" label="Create Account" />
-
-        <InputTextArea />
       </form>
     </section>
   );
